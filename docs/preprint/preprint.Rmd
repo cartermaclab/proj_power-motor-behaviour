@@ -244,7 +244,7 @@ Writing -- review & editing: BM, AC, MV, GJ, CT, HB, JH, MJC
 \noindent All authors thank Aaron Schwarz and Abigail Morgan for their help with data extraction.
 
 ## Open Science Practices
-\noindent The preregistration, data, and scripts can be accessed using either of the following links: https://osf.io/wsdpv/ or https://github.com/cartermaclab/proj_power-motor-behavior.
+\noindent The preregistration, data, and scripts can be accessed using either of the following links: https://osf.io/wsdpv/ or https://github.com/cartermaclab/proj_power-motor-behaviour.
 
 ## Conflicts of Interest
 
