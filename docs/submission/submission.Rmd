@@ -74,7 +74,7 @@ If motor behavior research does not currently report power analyses---especially
 
 # Methods
 
-Our design and analysis plan was preregistered after piloting our methods on a subsample of 40 papers. The preregistration, materials, data, and code from this study is available here: https://osf.io/wsdpv/.
+Our design and analysis plan was preregistered after piloting our methods on a subsample of 40 papers. The preregistration, data, and code for this study is available using either of the following links: https://osf.io/wsdpv/ \censor{or} \censor{$https://github.com/cartermaclab/proj_power-motor-behaviour$}.
 
 ## Power
 
@@ -83,10 +83,6 @@ Calculating *a priori* power for this study required estimating the final sample
 ## Sample
 
 All articles published in the *Journal of Motor Learning and Development*, *Human Movement Science*, and the *Journal of Motor Behavior* between January 2019 to June 2021 were uploaded to Covidence systematic review software and screened for inclusion (Figure \@ref(fig:fig1)). In total, 704 articles were reviewed. To be included in the analysis, studies were required to meet the following criteria: a) must be a primary study, b) must test a hypothesis, including the null hypothesis, c) there must be sufficient information available to adequately evaluate the criteria, and d) we must have access to the full-text. From the original 704 articles, 607 articles included at least one study that met the inclusion criteria and were included in the final analysis. Ninety-seven articles were excluded from the analysis for the following reasons: a) the studies were not primarily quantitative (63 studies), b) the studies made no hypothesis (27 studies), or there was insufficient information or a faulty DOI to assess the paper (7). The 607 included articles contributed a total of 636 eligible studies to the analysis.
-
-## Procedures
-
-Data extraction was conducted by an extraction team of eight researchers. Two independent researchers evaluated each article in Covidence, with a third researcher resolving any conflicts. In situations where a member of the extraction team encountered a challenging item, the member flagged the study on Covidence for the items to be extracted and the consensus decision to be made by the first author (*N* = 40). We extracted data for 11 items, which are outlined in Table \@ref(tab:table1). For Item 5, determining whether the authors of a study concluded the results supported their hypothesis involved two steps. First, the primary hypothesis of a study was identified, either because the authors specified the hypothesis as primary or it was the first independent hypothesis reported. When hypotheses were listed with multiple components, support for any component was considered support for the hypothesis. Any hypothesis explicitly labeled as secondary was not considered. Second, the interpretation of the results by the authors was examined. We coded support for hypotheses based on the interpretations in each paper, not based on our own criteria. Thus, if the authors predicted no effect of an independent variable, observed null results, and then concluded the results supported their hypothesis, we coded this as support for the hypothesis.
 
 \pagebreak
 
@@ -98,15 +94,11 @@ knitr::include_graphics("../../figs/fig1.pdf")
 
 \pagebreak
 
-## Statistical Analysis
+## Procedures
 
-To evaluate the overall prevalence of power analyses in the sampled literature, we calculated the percentage of all studies in our sample that conducted a power analysis:
-$$\frac{studies\, with\, power\, analysis}{studies\, with\, power\, analysis\, + studies\, without\, power\, analysis} \times 100$$
-We used a two-sided proportion test to assess whether the rate of positive results in studies with a power analysis was significantly different than in studies without a power analysis. We also tested whether the difference in positive result rates was statistically smaller than our smallest effect size of interest (6%) using an equivalence test for proportions. 
+Data extraction was conducted by an extraction team of eight researchers. Two independent researchers evaluated each article in Covidence, with a third researcher resolving any conflicts. In situations where a member of the extraction team encountered a challenging item, the member flagged the study on Covidence for the items to be extracted and the consensus decision to be made by the first author (*N* = 40). We extracted data for 11 items, which are outlined in Table \@ref(tab:table1). For Item 5, determining whether the authors of a study concluded the results supported their hypothesis involved two steps. First, the primary hypothesis of a study was identified, either because the authors specified the hypothesis as primary or it was the first independent hypothesis reported. When hypotheses were listed with multiple components, support for any component was considered support for the hypothesis. Any hypothesis explicitly labeled as secondary was not considered. Second, the interpretation of the results by the authors was examined. We coded support for hypotheses based on the interpretations in each paper, not based on our own criteria. Thus, if the authors predicted no effect of an independent variable, observed null results, and then concluded the results supported their hypothesis, we coded this as support for the hypothesis.
 
-We calculated the percentage of studies that conducted a power analysis with a) each effect justification and b) each power target. A two-sided, six sample proportion test was conducted to test whether at least two different effect size justifications in power analyses led to different rates of positive results. A two-sided, 11-sample proportion test was conducted to test whether at least two power targets resulted in a different rate of positive results. Lastly, we conducted a two-tailed Welch’s *t*-test to determine whether studies with power analyses had different sample sizes compared to studies without power analyses. Given the data were highly skewed, we also conducted a sensitivity analysis using a shift function [@R-rogme; @Rousselet2020; @Wilcox2021].
-
-Statistical tests were conducted using `r cite_r("../r-references.bib")` were used in this project.
+\pagebreak
 
 ```{r table1, echo=FALSE, results='asis'}
 
@@ -148,6 +140,16 @@ kbl(table1,
   column_spec(1, width = "21em") %>% 
   column_spec(2, width = "20em")
 ```
+
+## Statistical Analysis
+
+To evaluate the overall prevalence of power analyses in the sampled literature, we calculated the percentage of all studies in our sample that conducted a power analysis:
+$$\frac{studies\, with\, power\, analysis}{studies\, with\, power\, analysis\, + studies\, without\, power\, analysis} \times 100$$
+We used a two-sided proportion test to assess whether the rate of positive results in studies with a power analysis was significantly different than in studies without a power analysis. We also tested whether the difference in positive result rates was statistically smaller than our smallest effect size of interest (6%) using an equivalence test for proportions. 
+
+We calculated the percentage of studies that conducted a power analysis with a) each effect justification and b) each power target. A two-sided, six sample proportion test was conducted to test whether at least two different effect size justifications in power analyses led to different rates of positive results. A two-sided, 11-sample proportion test was conducted to test whether at least two power targets resulted in a different rate of positive results. Lastly, we conducted a two-tailed Welch’s *t*-test to determine whether studies with power analyses had different sample sizes compared to studies without power analyses. Given the data were highly skewed, we also conducted a sensitivity analysis using a shift function [@R-rogme; @Rousselet2020; @Wilcox2021].
+
+Statistical tests were conducted using `r cite_r("../r-references.bib")` were used in this project.
 
 # Results
 
@@ -239,10 +241,10 @@ Our results suggest that power analyses targeting the smallest effect size of in
 
 ## Acknowledgements
 
-\noindent All authors thank Aaron Schwarz and Abigail Morgan for their help with data extraction.
+\noindent All authors thank \censor{Aaron Schwarz} and \censor{Abigail Morgan} for their help with data extraction.
 
 ## Open Science Practices
-\noindent The preregistration, data, and scripts can be accessed using either of the following links: https://osf.io/wsdpv/ or https://github.com/cartermaclab/proj_power-motor-behaviour.
+\noindent The preregistration, data, and scripts can be accessed using either of the following links: https://osf.io/wsdpv/ \censor{or} \censor{$https://github.com/cartermaclab/proj_power-motor-behaviour$}.
 
 ## Conflicts of Interest
 
@@ -250,7 +252,7 @@ Our results suggest that power analyses targeting the smallest effect size of in
 
 ## Funding
 
-\noindent This work was supported by the Natural Sciences and Engineering Research Council (NSERC) of Canada (RGPIN-2018-05589; MJC) and McMaster University (MJC).
+\noindent This work was supported by \blackout{the Natural Sciences and Engineering Research Council (NSERC) of Canada (RGPIN-2018-05589; MJC) and McMaster University (MJC)}.
 
 \pagebreak
 
