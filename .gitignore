@@ -41,6 +41,13 @@ vignettes/*.pdf
 # Ignore cover letter directory
 *cover-letter*
 
+# Ignore blinded title page
+docs/submission/title-page*
+
+# Ignore pre-registration as it already is in OSF repo
+*preregistration*
+
+
 ## Core latex/pdflatex auxiliary files:
 *.aux
 *.lof
