@@ -1,0 +1,279 @@
+---
+title             : "Low prevalence of *a priori* power analyses in motor behavior research"
+shorttitle        : "Power analyses in motor behavior"
+
+# note: |
+#   \vspace{5ex}
+#   \textcolor{orange}{\textbf{\emph{NOT PEER-REVIEWED}}}
+
+authornote: |
+  \vspace{-0.5cm}
+  \noindent \addORCIDlink{Brad McKay}{0000-0002-7408-2323} \newline
+  \noindent \addORCIDlink{Michael J. Carter}{0000-0002-0675-4271} \vspace{2ex} \newline
+  \noindent Data and code: https://osf.io/wsdpv/ \vspace{2ex} \newline
+  \noindent \textbf{Corresponding authors:} Brad McKay (bradmckay8@gmail.com; mckayb9@mcmaster.ca) and Michael J. Carter (cartem11@mcmaster.ca; motorlab@mcmaster.ca)
+
+
+abstract: |
+  *A priori* power analyses can ensure studies are unlikely to miss interesting effects. Recent metascience has suggested that kinesiology research may be underpowered and selectively reported. Here, we examined whether power analyses are being used to ensure informative studies in motor behavior. We reviewed every article published in three motor behavior journals between January 2019 and June 2021. Power analyses were reported in 13% of studies (*k* = \textcolor{blue}{635}) that tested a hypothesis. No study targeted the smallest effect size of interest. Most studies with a power analysis relied on estimates from previous experiments, pilot studies, or benchmarks to determine the effect size of interest. Studies without a power analysis reported support for their main hypothesis 85% of the time, while studies with a power analysis found support \textcolor{blue}{77}% of the time. The median sample sizes were *n* = 17.5 without a power analysis and *n* = 16 with a power analysis, suggesting the typical study design was underpowered for all but the largest plausible effect size. At present, power analyses are not being used to optimize the informativeness of motor behavior research. Adoption of this widely recommended practice may greatly enhance the credibility of the motor behavior literature.
+  
+keywords          : "Metascience, Sample size planning, Positivity rates, Effect size"
+#wordcount         : ""
+
+bibliography      : ["../references.bib", "../r-references.bib"]
+
+floatsintext      : yes
+figurelist        : no
+tablelist         : no
+footnotelist      : no
+linenumbers       : yes
+mask              : yes
+draft             : no
+
+csl               : "`r system.file('rmd', 'apa7.csl', package = 'papaja')`"
+documentclass     : "apa7"
+classoption       : "man, donotrepeattitle"
+#fontsize          : 11pt
+output            : papaja::apa6_pdf
+
+header-includes   :
+  - \usepackage{pdflscape}
+  - \usepackage{setspace}
+  - \usepackage{censor}
+ # - \pagewiselinenumbers
+  - \raggedbottom
+
+  - \renewcommand\author[1]{}
+  - \renewcommand\affiliation[1]{}
+  - \authorsnames[1, 2, 2, 3, 3, 2, 2, 1]{Brad McKay, Abbey Corson, Mary-Anne Vinh, Gianna Jeyarajan, Chitrini Tandon, Hugh Brooks, Julie Hubley, Michael J. Carter\vspace{2ex}}
+  - \authorsaffiliations{{Department of Kinesiology, McMaster University}, {School of Human Kinetics, University of Ottawa}, {School of Interdisciplinary Sciences, McMaster University}}
+---
+
+```{r setup, include = FALSE}
+library(papaja)
+library(kableExtra)
+library(tidyverse)
+```
+
+```{r analysis-preferences}
+# Seed for random number generation
+set.seed(42)
+knitr::opts_chunk$set(cache.extra = knitr::rand_seed)
+```
+
+
+Motor behavior research frequently involves proposing hypotheses and subjecting them to statistical tests. The probability that a statistical test will correctly reject the null hypothesis, conditional on a true effect of a given size and an accepted rate of false-positive results, is called power [@Cohen1962; @Cohen1988; @Neyman1937; @Neyman1942]. Power should be a central concern for statistical hypothesis testers with finite resources and the journals that publish their results. For researchers, power calculations are useful when designing studies to optimize the use of resources, and especially for avoiding studies that have a low probability of producing informative results. For journals, the range of effects a study has the power to rule out is an indication of how potentially informative that study was *a priori*. Unfortunately, power analyses can also be misleading. Power can be seriously overestimated by the wrong parameters---many of which are entirely based on the researcher’s judgment. To conduct a power analysis at least four parameters are required: the design of the study, the size of the assumed effect, the frequency of false-positives, and the frequency of false-negatives. Although each of these specifications should be justified [@Lakens2021; @Lakens2018], researchers often rely on conventions. For example, false-positive and false-negative rates have conventionally been set at 5% and 20%, respectively [@Cohen1988]. Many researchers and journals may consider false-negative rates of 10% or 5% more appropriate, but this consideration should be made thoughtfully [see @Lakens2021 for a discussion].
+
+Standardized effect sizes also have conventional benchmarks that researchers may rely on when designing studies. Recent metascience suggests doing so is likely to result in underpowered research designs in practice [@Lovakov2021]. Instead of relying on benchmarks, some researchers may base their effect size target on a previous study or the results of a pilot study. However, large multi-lab replication studies have revealed that original studies may overestimate the true effect of an independent variable by 100% to 400% [@Klein2018; @OPENSCIENCECOLLABORATION2015]. Pilot studies are often even less helpful, as they tend to be smaller than published experiments so their estimates are even more imprecise [@Albers2018; @Kraemer2006; @Lakens2014]. When available, meta-analyses provide an effect size estimate based on the aggregation of available data. However, selective reporting of results can distort meta-analytic estimates and it can be difficult to correct for reporting bias [@Carter2019; @Thornton2000]. Nevertheless, estimates that have been corrected for reporting bias are more accurate than naïve random effects estimates and should be used when available [@Carter2019]. \textcolor{blue}{Targeting the estimated mean effect will only provide the desired power if the effect is average or above average in the specific context being investigated. Therefore, even if researchers are privy to a precise and unbiased estimate of the mean effect they are studying, they still might choose a different effect to target in their power analysis.}
+
+A better strategy for choosing the effect size for an *a priori* power analysis does not rely on mean estimates and instead the researcher specifies their smallest effect size of interest [@Lakens2021]. If a researcher targeting 80% power estimates an effect is *d* = .5 but would still be interested if it was *d* = .2, they will miss their smallest effect size of interest 80% of the time. Instead of powering for the expected effect, researchers that power for their smallest effect size of interest guarantee their study design will not be underpowered for interesting effects. Researchers can extend this strategy to maximize the informativeness of their studies by making one-tailed predictions with 95% power. In this situation, null results are significantly smaller than the smallest effect size of interest. Studies designed this way may help prevent distortion from selection bias as both positive and negative results can be interpreted as significant.
+
+Given the potential for power analyses to enhance the inferential value of studies and the myriad suboptimal strategies that may be employed, we chose to investigate the proportion of recent studies where motor behavior scientists reported a power analysis and their justification for their selected effect size. We focused on motor behavior research as recent meta-analyses have reported evidence of both underpowered research and substantial reporting bias in motor learning and sports science [@Lohse2016; @McKay2021; @McKay2022; @Mesquida2022]. For example, a meta-analysis of the self-controlled motor learning literature estimated the average power of all studies conducted was 6%, while 48% of studies reported significant results on the focal measure [@McKay2021]. Other studies have estimated average power ranging from 20% [@McKay2022] to 50% [@Mesquida2022], with significant indications of reporting bias. The combination of low power and significance-based selective reporting is pernicious to the accumulation of scientific evidence. Statistically significant results in studies with low power are likely to substantially overestimate the effect of the independent variable. When power dips below 10%, significant results in the wrong direction become increasingly likely [@Gelman2014].
+
+If motor behavior research does not currently report power analyses---especially for the smallest effect size of interest---then future adoption of these best practices could potentially address issues of low power and selective reporting. Investigating this possibility, we examined the prevalence of *a priori* power analyses in three motor behavior journals, the justifications used for effect size assumptions, and their association with studies finding positive results. The goal of this study was descriptive. Our main purpose was simply to understand the current use of power analyses in the motor behavior literature. However, we did posit several exploratory hypotheses. We predicted that studies with a power analysis would have a different rate of positive results from studies without a power analysis. However, due to potential selection effects we did not speculate about the direction of this difference *a priori*. We predicted that some justifications would differ in the frequency of positive results, with pilot studies being especially unsuccessful. We also predicted that differences in targeted power would be associated with different positivity rates given the primary function of a power analysis. Finally, we predicted that there would be a difference in the sample size obtained by studies that conducted a power analysis compared to those that did not, again without speculating about the direction.
+
+# Methods
+
+Our design and analysis plan was preregistered after piloting our methods on a subsample of 40 papers. The preregistration, materials, data, and code are available using either of the following links: https://osf.io/wsdpv/ \censor{or} \censor{$https://github.com/cartermaclab/proj_power-motor-behaviour$}.
+
+## Power
+
+Calculating *a priori* power for this study required estimating the final sample size and proportion of studies that would include a power analysis. Based on the pilot sample of articles, we estimated that the total number of studies we would extract would be approximately 500. The actual number was \textcolor{blue}{635}. We reasoned that if 10% of those studies included a power analysis, we would have 50 studies with power analyses and 450 studies without power analyses in our sample. The actual numbers were 13%, \textcolor{blue}{84} and 551. Based on our rough estimates, we conducted simulations to estimate our power to detect differences in positive result rates of various plausible sizes. We based our expected positive results rate in studies without power analyses on estimates for psychology overall at 91.5% [@Fanelli2010]. We observed that, if our estimates were accurate, we would have 90% power to detect a difference of 16.5%, or a positive result rate of 75% in experiments with power analyses. Similarly, we estimated we would have 80% power to identify a positive result rate of 77.7% as significantly different. Unfortunately, if our estimated group sizes were accurate, we would have had low power (32%) to detect our smallest effect size of interest (6%). Given the actual sample sizes we observed, we had even greater power than planned to observe the effects we considered.
+
+## Sample
+
+All articles published in the *Journal of Motor Learning and Development*, *Human Movement Science*, and the *Journal of Motor Behavior* between January 2019 to June 2021 were uploaded to Covidence systematic review software and screened for inclusion (Figure \@ref(fig:fig1)). In total, 704 articles were reviewed. To be included in the analysis, studies were required to meet the following criteria: a) must be a primary study, b) must test a hypothesis, including the null hypothesis, c) there must be sufficient information available to adequately evaluate the criteria, and d) we must have access to the full-text. From the original 704 articles, \textcolor{blue}{606} articles included at least one study that met the inclusion criteria and were included in the final analysis. Ninety-\textcolor{blue}{eight} articles were excluded from the analysis for the following reasons: a) the studies were not primarily quantitative (63 studies), b) the studies made no hypothesis (27 studies), or there was insufficient information or a faulty DOI to assess the paper (\textcolor{blue}{8}). The \textcolor{blue}{606} included articles contributed a total of \textcolor{blue}{635} eligible studies to the analysis.
+
+\pagebreak
+
+```{r fig1, echo = FALSE, fig.cap = "(ref:fig1-caption)", fig.align = "center"}
+knitr::include_graphics("../../figs/fig1.pdf")
+```
+
+(ref:fig1-caption) PRISMA flow diagram.
+
+\pagebreak
+
+## Procedures
+
+Data extraction was conducted by an extraction team of eight researchers. Two independent researchers evaluated each article in Covidence, with a third researcher resolving any conflicts. In situations where a member of the extraction team encountered a challenging item, the member flagged the study on Covidence for the items to be extracted and the consensus decision to be made by the first author (*N* = 40). We extracted data for 11 items, which are outlined in Table \@ref(tab:table1). For Item 5, determining whether the authors of a study concluded the results supported their hypothesis involved two steps. First, the primary hypothesis of a study was identified, either because the authors specified the hypothesis as primary or it was the first independent hypothesis reported. When hypotheses were listed with multiple components, support for any component was considered support for the hypothesis. Any hypothesis explicitly labeled as secondary was not considered. Second, the interpretation of the results by the authors was examined. We coded support for hypotheses based on the interpretations in each paper, not based on our own criteria. Thus, if the authors predicted no effect of an independent variable, observed null results, and then concluded the results supported their hypothesis, we coded this as support for the hypothesis.
+
+```{r table1, echo=FALSE, results='asis'}
+
+table1 <- tibble(
+  c1 = c("1. Did the study meet the inclusion criteria?",
+         "2. Did the authors report a power analysis?",
+         "3. Hypothesis quote.",
+         "4. Results quote.",
+         "5. Did the authors conclude support for any of the main hypotheses?",
+         "6. Sample size.",
+         "7. Power analysis effect type.",
+         "8. Power analysis effect estimate.",
+         "9. Power analysis effect converted to Cohen's d.",
+         "10. Effect size justification.",
+         "11. Power estimate from the power analysis."),
+  c2 = c("Yes or No, and provide reason.",
+         "Yes or No.",
+         "Copy pasted quote of the hypotheses.",
+         "Copy pasted quote of the results interpretation",
+         "Yes or No.",
+         "Calculate average per group.",
+         "Select from a list.",
+         "Report the effect size used for the analysis.",
+         "Perform conversion whenever possible.",
+         "Select from a list.",
+         "Report value.")
+)
+
+kbl(table1,
+    booktabs = TRUE,
+    escape = TRUE,
+    linesep = "\\addlinespace",
+    caption = "Elements of the data extraction process and the corresponding action the researchers performed.",
+    col.names = c("Item",
+                  "Action")
+) %>% 
+  kable_styling(position = "left",
+                font_size = 11) %>% 
+  column_spec(1, width = "21em") %>% 
+  column_spec(2, width = "20em")
+```
+
+## Statistical analysis
+
+Statistical tests were conducted using `r cite_r("../r-references.bib")` were used in this project.
+
+### Pre-registered analyses
+
+To evaluate the overall prevalence of power analyses in the sampled literature, we calculated the percentage of all studies in our sample that conducted a power analysis:
+$$\frac{studies\, with\, power\, analysis}{studies\, with\, power\, analysis\, + studies\, without\, power\, analysis} \times 100$$
+We used a two-sided proportion test to assess whether the rate of positive results in studies with a power analysis was significantly different than in studies without a power analysis. We also tested whether the difference in positive result rates was statistically smaller than our smallest effect size of interest (6%) using an equivalence test for proportions. 
+
+We calculated the percentage of studies that conducted a power analysis with a) each effect justification and b) each power target. A two-sided, six sample proportion test was conducted to test whether at least two different effect size justifications in power analyses led to different rates of positive results. A two-sided, 11-sample proportion test was conducted to test whether at least two power targets resulted in a different rate of positive results. We conducted a two-tailed Welch’s *t*-test to determine whether studies with power analyses had different sample sizes compared to studies without power analyses. Given the data were highly skewed, we also conducted a sensitivity analysis using a shift function [@R-rogme; @Rousselet2020; @Wilcox2021]. 
+
+### Exploratory analysis
+
+\textcolor{blue}{We used a 3-sample proportion test to compare the proportion of studies including a power analysis in the three journals surveyed.}
+
+# Results
+
+## Pre-registered analyses
+
+### Proportion of studies with a power analysis 
+
+Out of \textcolor{blue}{635} total studies, \textcolor{blue}{84} included a power analysis and 551 did not\textcolor{blue}{; thus,} 13% of all studies sampled reported the results of a power analysis.
+
+### Difference in positivity rates between studies with and without a power analysis 
+
+As shown in Figure \@ref(fig:fig2), studies that did not include a power analysis reported finding support for their primary hypothesis 85% of the time (95% CI [82%, 88%]), while studies that included a power analysis found support \textcolor{blue}{77}% of the time (95% CI [\textcolor{blue}{67}%, \textcolor{blue}{86}%]). The difference in positivity rates was not statistically significant, $\chi^2$= \textcolor{blue}{2.71}, *df* = 1, *p* = \textcolor{blue}{.10}. The difference is positivity rates was not significantly smaller than our smallest effect size of interest, *Z* = \textcolor{blue}{.361}, *p* = \textcolor{blue}{.641}.
+
+\pagebreak
+
+```{r fig2, echo = FALSE, fig.cap = "(ref:fig2-caption)", fig.align = "center"}
+knitr::include_graphics("../../figs/fig2.pdf")
+```
+
+(ref:fig2-caption) Proportion of studies with (blue) and without (grey) power analyses and whether the authors concluded support for their primary hypotheses. Each square represents a single study in our sample. The majority of studies in our sample did not include a power analysis. The most common combination was "No Power-Analysis & Support" (light grey) while "Power-Analysis & No Support" (light blue) was the least common combination.
+
+\pagebreak
+
+### Justifications for effect sizes used in power analyses 
+
+The most common justification reported in our sample was to base the expected effect size on a previous study (*n* = 37), accounting for 44% of all justifications. The second most common justification was to provide no justification at all (*n* = 20), which occurred in 24% of studies that included a power analysis. Cohen’s benchmarks for small, medium, and large effects (*n* = \textcolor{blue}{18}) were used in \textcolor{blue}{21}% of studies. Pilot studies (*n* = 9) were used as justification in 11% of the sample.
+
+### Power levels targeted in power analyses
+
+The most frequently targeted power was 80%, which was chosen in \textcolor{blue}{64}% of studies with a power analysis (*n* = \textcolor{blue}{54}). The next most common power target was 95%, accounting for 14% of all power targets (*n* = 12); followed by 90% power, occurring in 11% of power analyses (*n* = 9). Two studies did not state their targeted power and several idiosyncratic power targets (96.7%, 96%, 95.33%, 85%, 75%, 70%, and 20%) were reported only once.
+
+### Difference in positivity rates as a function of effect size justification
+
+Figure \@ref(fig:fig3) illustrates the proportion of positive results for the four effect size justifications we found in our sample. Positivity rates were 100% for pilot study justification (9/9), 90% for studies with no justification (18/20), \textcolor{blue}{72}% for studies based on benchmarks (13/\textcolor{blue}{18}), and 68% for studies based on previous studies (25/37). There was no significant difference between the positivity rates of any two justifications, $\chi^2$ = \textcolor{blue}{6.76}, *df* = 3, *p* = \textcolor{blue}{.08}.
+
+\pagebreak
+
+```{r fig3, echo = FALSE, fig.cap = "(ref:fig3-caption)", fig.align = "center"}
+knitr::include_graphics("../../figs/fig3.pdf")
+```
+
+(ref:fig3-caption) Proportion of studies where authors concluded support (blue) or no support (black) for their primary hypotheses as a function of their effect size justification. Each square represents a single study. Of the list of possible effect size justifications, we only found data for four justifications.
+
+\pagebreak
+
+### Difference in positivity rates as a function of target power
+
+Studies that targeted 80% power found support for their hypotheses \textcolor{blue}{70}% of the time (38/\textcolor{blue}{54}). Studies that aimed for 90% power found support 100% of the time (8/8) and studies that aimed for 95% power found support 75% of the time (9/12). All studies that set an idiosyncratic power target or no target at all found support for their hypotheses (10/10). There was no significant difference between target power values, $\chi^2$= \textcolor{blue}{6.82}, *df* = 10, *p* = \textcolor{blue}{.743}.
+
+### Difference in sample size between studies with and without a power analysis
+
+Studies that included a power analysis had significantly smaller mean sample sizes (*M* = \textcolor{blue}{21.75}) than studies that did not include a power analysis (*M* = 40.98), *t*(\textcolor{blue}{624.63})= \textcolor{blue}{3.45}, *p* = .001. However, sample sizes were highly skewed---especially among studies without a power analysis. The median sample for those studies (*Mdn* = 17.5) was similar to the sample sizes of studies with a power analysis (*Mdn* = 16). We conducted a shift function as a sensitivity analysis and the results indicated no significant difference in sample size between studies with and without power analyses at any decile of their distributions.
+
+## Exploratory analysis
+
+### Difference among journals in proportion of studies with a power analysis
+
+\textcolor{blue}{Studies published in Human Movement Science included a power analysis (59/271) 18\% of the time, the Journal of Motor Learning and Development (9/128) 10\% of the time, and the Journal of Motor Behavior (16/152) 7\% of the time. The 3-samples proportions test was significant, $\chi^2$ = 13.52, \emph{df} = 2, \emph{p} = .001.} 
+
+# Discussion
+
+The purpose of this study was to investigate how frequently power analyses are reported in motor behavior articles, the justifications used for the effect size estimates, and the relationship between reporting power analyses and reporting positive results. We reviewed every article published in the *Journal of Motor Behavior*, the *Journal of Motor Learning and Development*, and *Human Movement Science* between January 2019 and June 2021 and identified 63\textcolor{blue}{5} studies that tested a hypothesis. Of those 63\textcolor{blue}{5} studies, 8\textcolor{blue}{4}  included a power analysis (13%). The rate of positive results was 85% overall and 7\textcolor{blue}{7}% when a power analysis was reported. The positive result rate was not significantly different between various effect size justifications or power targets.
+
+Our results \textcolor{blue}{cause us to wonder whether} motor behavior research has not yet widely adopted power analyses to inform study design. When power analyses were reported, we observed a range of suboptimal effect size justifications. \textcolor{blue}{Specifically, 76\%} of studies that reported a power analysis based their effect size assumption on a previous study \textcolor{blue}{(\emph{n} = 37, 44\%)}, a pilot study  \textcolor{blue}{(\emph{n} = 9, 11\%)}, or on effect size benchmarks \textcolor{blue}{(\emph{n} = 18, 21\%)}. \textcolor{blue}{The remaining} 24% of studies provided no justification at all. Each of these justifications (or lack thereof) are undesirable for different reasons. Previous studies---and especially pilot studies---are likely to provide exaggerated or noisy estimates of the unknown true effect. Effect size benchmarks may not match well the typical effect sizes one may find in their respective research area [@Lovakov2021]. Further, Cohen’s [@Cohen1988] benchmarks differ depending on which analysis is used in a power analysis. A medium effect is over twice as large for a multiple regression analysis as compared to a *t*-test [see @Correll2020 for a discussion with additional examples]. Not one study in the sample performed a power analysis based on their smallest effect size of interest. Power analyses can be an effective tool for researchers to ensure their studies are not underpowered, but to do so the smallest effects of interest need to be targeted.
+
+The rate of positive results observed in this study suggest that positive findings are overrepresented in the motor behavior literature. While the studies in our sample reported positive results 84% of the time, the median per group sample size was ~17, which would provide 84% power to detect *d* = 1.05 with an independent *t*-test or *d* = .76 with a dependent *t*-test. In comparison, the most optimistic estimates for well-known motor behavior phenomena are much smaller. For example, the effect of feedback frequency on motor performance [*d* = .19, @McKay2022], self-controlled practice on retention performance [*d* = .54, @McKay2021], enhanced expectancies on retention performance [*d* = .54, @Bacelar2022], and external focus of attention on retention performance [*d* = .58, @Chua2021]. Estimates for the true effects of these phenomena that have been corrected for reporting-bias are markedly smaller, ranging from *d* = 0 to *d* = .25. Assuming the average effects investigated by the studies in our sample were similar to the optimistic estimates for other motor behavior effects, it is likely this literature was underpowered on average and potentially heavily censored.[^1]
+
+[^1]: \textcolor{blue}{We use the term "censored" here to mean that some experiments fail to enter the published literature for results-dependent reasons, commonly called publication bias or reporting bias.} 
+
+All three journals that we sampled from either explicitly mention power in their instructions for authors (*Human Movement Science*), or reference JARS (*Journal of Motor Learning and Development*) or CONSORT (*Journal of Motor Behavior*) reporting standards; both of which include power analyses. \textcolor{blue}{Perhaps the approach of more directly instructing authors to include a power analysis explains why Human Movement Science had a higher proportion of studies with a power analysis. This post-hoc explanation is consistent with the modest increase in power analysis reporting observed following adoption of guidelines requiring sample size justification in the journal Gait \& Posture} [@McCrum2022]. \textcolor{blue}{ However, less than one in five studies in \emph{Human Movement Science} included a power analysis so including explicit instructions to authors is not sufficient to promote widespread reporting. It seems the} adoption of power analyses targeting interesting effects does not require a policy shift, simply the enforcement of current guidelines. Since no studies in this sample powered for the smallest effect size of interest, if *Human Movement Science*, the *Journal of Motor Behavior*, and/or the *Journal of Motor Learning and Development* enforce their existing guidelines then their future publications \textcolor{blue}{might} look dramatically different. \textcolor{blue}{Even if power analysis reporting becomes the norm, it may remain unclear whether power analyses were conducted during the design of the study or at a later stage. Therefore, the most credible confirmatory studies will have preregistered power analyses. A bold journal might even require it.} We believe this is a promising path forward to increase the reliability of motor behavior research and the evidence-based recommendations for coaching and rehabilitation.
+
+## Limitations
+
+The specific designs and test statistics from the studies in our sample were not extracted, so we cannot calculate the estimated average power of the sample. This also complicates the interpretation of sample size differences among studies with and without power analyses. For example, if studies that used within-subjects designs were also more likely to conduct a power analysis, it would make sense that those studies would have smaller samples overall. Within-subjects designs are substantially more powerful than between-subjects, so all other things being equal, studies with within-subjects designs require less participants to be adequately powered.
+
+We do not differentiate between partial and full support for hypotheses, nor did we code for whether the hypothesis was directional, non-directional, or if the null hypothesis was framed as the primary hypothesis in the study. As such, we must be cautious not to regard positivity rate as a direct analogue for implied power. There were studies that predicted no difference between experimental conditions, failed to reject the null hypothesis, and then interpreted the result as supporting their primary hypothesis. While this approach to hypothesis testing is problematic, our goal with this study was to describe the proportions of positive results and power analyses, not to critique the specific methods employed in each study.
+
+\textcolor{blue}{Selection bias makes it challenging to interpret the impact of power analyses on positive results and sample sizes. It is possible that power analyses are sometimes added to a study to defend a null result or a small sample size. It is also possible that researchers who conduct power analyses choose to study larger effects, leading to smaller sample sizes. We encourage readers to focus on the overall low frequency of power analysis reporting, small average sample sizes, and high rates of positive results as a description of the modern motor behavior literature.}
+
+# Conclusion
+
+Our results suggest that power analyses targeting the smallest effect size of interest [@Lakens2022] have the potential to change the state of the motor behavior literature. Hypothesis tests are the norm in this space, yet power calculations targeting interesting effects are not. It is logical for researchers to plan studies with a high probability of producing informative results and it is consistent with current reporting standards [@Appelbaum2018]. Given the recent concern about the reliability of established motor behavior phenomena [@McKay2021; @McKay2022; @Lohse2016; @Mesquida2022], we believe power analyses have an important role to play in increasing the credibility of our field.
+
+\vspace{5ex}
+
+## Author Contributions (CRediT Taxonomy)
+
+\noindent Conceptualization: \censor{BM, MJC}  
+\noindent Data curation: \censor{BM, MJC}  
+\noindent Formal analysis: \censor{BM}  
+\noindent Funding acquisition: \censor{MJC}  
+\noindent Investigation: \censor{BM, AC, MV, GJ, CT, HB, JH}  
+\noindent Methodology: \censor{BM, MJC}  
+\noindent Project administration: \censor{BM, MJC}  
+\noindent Software: \censor{BM, MJC}  
+\noindent Supervision: \censor{BM, MJC}  
+\noindent Validation: \censor{BM, MJC}  
+\noindent Visualization: \censor{BM, MJC}  
+\noindent Writing -- original draft: \censor{BM, AC, MV, GJ, CT, HB, JH, MJC}  
+\noindent Writing -- review & editing: \censor{BM, AC, MV, GJ, CT, HB, JH, MJC}  
+
+## Acknowledgements
+
+\noindent All authors thank \censor{Aaron Schwarz} and \censor{Abigail Morgan} for their help with data extraction.
+
+## Open Science Practices
+\noindent The preregistration, data, and scripts can be accessed using either of the following links: https://osf.io/wsdpv/ \censor{or} \censor{$https://github.com/cartermaclab/proj_power-motor-behaviour$}.
+
+## Conflicts of Interest
+
+\noindent All authors declare no conflicts of interest.
+
+## Funding
+
+\noindent This work was supported by \blackout{the Natural Sciences and Engineering Research Council (NSERC) of Canada (RGPIN-2018-05589; MJC) and McMaster University (MJC)}.
+
+\pagebreak
+
+# References
+
+\vspace{2ex}
+::: {#refs custom-style="Bibliography"}
+:::
