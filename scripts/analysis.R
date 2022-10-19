@@ -9,7 +9,7 @@
 #>   Brad McKay
 #>   Mike Carter
 #>
-#> Last update: June 26 2022
+#> Last update: October 18 2022
 #>
 #> Website: https://www.cartermaclab.org
 #> -------------------------------------------
@@ -177,3 +177,10 @@ psf[[1]]
 #   plots = TRUE
 # )
 # tost_sample_size_diff
+
+
+#> Test difference in proportion of studies with a power analysis by journal
+power_vector <- tapply(pwr, journal, sum)
+total_journal_vector <- tapply(total, journal, sum)
+
+prop.test(power_vector, total_journal_vector)

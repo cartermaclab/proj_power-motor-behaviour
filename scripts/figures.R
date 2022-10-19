@@ -9,7 +9,7 @@
 #>   Brad McKay
 #>   Mike Carter
 #>
-#> Last update: June 18 2022
+#> Last update: October 18 2022
 #>
 #> Website: https://www.cartermaclab.org
 #> -------------------------------------------
@@ -29,9 +29,9 @@ fig1 <- PRISMAstatement::prisma(
   screened = 704,
   screen_exclusions = 0,
   full_text = 704,
-  full_text_exclusions = 97,
-  qualitative = 607,
-  quantitative = 607,
+  full_text_exclusions = 98,
+  qualitative = 606,
+  quantitative = 606,
   width = 1600,
   height = 1600,
   font_size = 12

@@ -9,7 +9,7 @@
 #>   Brad McKay
 #>   Mike Carter
 #>
-#> Last update: June 26 2022
+#> Last update: October 18 2022
 #>
 #> Website: https://www.cartermaclab.org
 #> -------------------------------------------
@@ -62,6 +62,10 @@ consensus_data <- consensus_data %>%
     'exp4_effect_justification',
     'exp4_pwr_estimate'
   )
+
+#> Add code for journal
+consensus_data$journal = with(consensus_data, ifelse(Covidence > 1837, "HMS",
+                               ifelse(1838 > Covidence & Covidence > 1207, "JMLD", "JMB")))
 
 #> Count included and excluded studies and get other descriptives
 dplyr::count(consensus_data, included)
@@ -205,3 +209,12 @@ total_pwr_vector <- tapply(
   pwr_analysis$pwr_fct,
   sum
 )
+
+#> Create vectors for proportions test comparing journals
+
+included_long %>% count(pwranal, journal)
+journal <- c("HMS", "JMLD", "JMB")
+total <- c((271 + 59), (128 + 9), (152 + 16))
+pwr <- c(59, 9, 16)
+
+
