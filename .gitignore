@@ -44,6 +44,9 @@ vignettes/*.pdf
 # Ignore blinded title page
 docs/submission/title-page*
 
+# Ignore stupid tiff files
+*.tiff
+
 # Ignore pre-registration as it already is in OSF repo
 *preregistration*
 
